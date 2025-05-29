@@ -4,12 +4,22 @@ function XLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
 
+    // Empty field checks
+    if (!username) {
+      setMessage('Username is required');
+      return;
+    }
+
+    if (!password) {
+      setMessage('Password is required');
+      return;
+    }
+
+    // Credential validation
     if (username === 'user' && password === 'password') {
       setMessage('Welcome, user!');
     } else {
@@ -18,43 +28,37 @@ function XLogin() {
   };
 
   return (
-    <div style={{ maxWidth: '300px', margin: 'auto' }}>
+    <div>
       <h1>Login Page</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} aria-label="login-form">
         <div>
-          <label htmlFor="username">Username</label><br />
+          <label htmlFor="username">Username</label>
           <input
-            type="text"
             id="username"
             name="username"
+            type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
 
-        <div style={{ marginTop: '10px' }}>
-          <label htmlFor="password">Password</label><br />
+        <div>
+          <label htmlFor="password">Password</label>
           <input
-            type="password"
             id="password"
             name="password"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
 
-        <div style={{ marginTop: '10px' }}>
-          <button type="submit" disabled={!username || !password}>
-            Submit
-          </button>
-        </div>
+        <button type="submit">Submit</button>
       </form>
 
-      {submitted && (
-        <div style={{ marginTop: '15px' }}>
-          <strong>{message}</strong>
-        </div>
-      )}
+      {message && <div role="alert">{message}</div>}
     </div>
   );
 }
