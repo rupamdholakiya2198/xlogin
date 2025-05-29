@@ -24,8 +24,9 @@ function XLogin() {
         <div>
           <label htmlFor="username">Username</label><br />
           <input
-            id="username"
             type="text"
+            id="username"
+            name="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -34,8 +35,9 @@ function XLogin() {
         <div style={{ marginTop: '10px' }}>
           <label htmlFor="password">Password</label><br />
           <input
-            id="password"
             type="password"
+            id="password"
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
